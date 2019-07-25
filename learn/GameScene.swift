@@ -23,6 +23,7 @@ class GameScene: SKScene {
     var ballHeight = SKLabelNode()
     var timeLabel = SKLabelNode()
     var endScore = SKLabelNode()
+    var highscoreLabel = SKLabelNode()
     var timer:Timer?
     var timeLeft = 30
     
@@ -38,8 +39,10 @@ class GameScene: SKScene {
         ball = self.childNode(withName: "ball") as! SKSpriteNode
         ballHeight = self.childNode(withName: "heightLabel") as! SKLabelNode
         timeLabel = self.childNode(withName: "timeLabel") as! SKLabelNode
+        highscoreLabel = self.childNode(withName: "highscoreLabel") as! SKLabelNode
         timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(onTimerFires), userInfo: nil, repeats: true)
         endScore.isHidden = true
+        highscoreLabel.isHidden = true
     }
     
     
@@ -106,8 +109,9 @@ class GameScene: SKScene {
                 highscore = Float(height)
             }
             
-            if  highscore <= Float(height) {
+            if  highscore < Float(height) {
                 let file = "leaderboard"
+                highscoreLabel.isHidden = false
                 let DocumentDirURL = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
                 let fileURL = DocumentDirURL.appendingPathComponent(file).appendingPathExtension("txt")
                 do {
