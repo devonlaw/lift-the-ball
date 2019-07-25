@@ -109,7 +109,7 @@ class GameScene: SKScene {
                 highscore = Float(height)
             }
             
-            if  highscore < Float(height) {
+            if  highscore <= Float(height) {
                 let file = "leaderboard"
                 highscoreLabel.isHidden = false
                 let DocumentDirURL = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
